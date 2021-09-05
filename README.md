@@ -38,8 +38,9 @@ roslaunch kinect2_bridge kinect2_bridge.launch
 
 I refer to this blog：https://blog.csdn.net/weixin_42675603/article/details/107785376
 ```
-cd ~/catkin_ws/src/cv-meter          # Your ROS workspace
-source install/setup.bash --extend
+cd ~/catkin_ws/src/cv-meter/scripts          # Your ROS workspace
+chmod a+x _setup_util.py
+source setup.bash --extend
 ```
 
 2.run the YOLO v4 node：
