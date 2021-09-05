@@ -43,7 +43,9 @@ source install/setup.bash --extend
 ```
 
 2.run the YOLO v4 node：
+
 download the model data file(avaliable later)
+
 change the path from scripts/yolo.py to your model data file's path.
 ```
 rosrun cv-meter Kinect2_yolo.py
