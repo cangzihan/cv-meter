@@ -15,9 +15,10 @@ from utils.utils import letterbox_image
 
 from sort import SORT
 
-current_path = "/home/zihan/ros/catkin_ws/src/distance_measurement_master/scripts"
+# change this path to yours
+current_path = "/home/zihan/catkin_ws/src/cv-meter/scripts"
 
-image_size = '1080p'
+image_size = '720p'
 
 fx = 1073.86040929768
 fy = 1074.22963341670

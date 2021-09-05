@@ -4,7 +4,7 @@
 # roslaunch kinect2_bridge kinect2_bridge.launch
 # cd catkin_workspace/
 # source install/setup.bash --extend
-# rosrun distance_measurement_master Kinect2_yolo.py
+# rosrun cv-meter Kinect2_yolo.py
 import rospy
 from std_msgs.msg import String
 from sensor_msgs.msg import Image as Image_ros
@@ -21,6 +21,7 @@ from PIL import Image
 
 from yolo import YOLO
 
+save_result = False
 save_path = "/home/zihan/ros/pics/"
 
 physical_devices = tf.config.experimental.list_physical_devices('GPU')
@@ -51,15 +52,11 @@ def callback(data):
     frame = Image.fromarray(np.uint8(frame))
 
     # 进行检测当前帧（文件已经读取完毕）
-    frame, results = yolo.detect_image(frame, ros_mode=True, depth_pic=frame_depth)
+    frame, results = yolo.detect_image(frame, depth_pic=frame_depth)
     frame = np.array(frame)
 
     # RGBtoBGR满足opencv显示格式
     frame = cv2.cvtColor(frame,cv2.COLOR_RGB2BGR)
-
-    fps  = ( fps + (1./(time.time()-t1)) ) / 2
-    print("fps= %.2f"%(fps))
-    frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
     pos_person = []
     pos_manipulator = []
@@ -69,27 +66,28 @@ def callback(data):
         elif result[3] == "manipulator":
             pos_manipulator.append(np.array(result[:3]))
 
+    num_distance = 0
     if len(pos_person) * len(pos_manipulator) > 0:
         for i in range(len(pos_person)):
             for j in range(len(pos_manipulator)):
+                if pos_person[i][2] == -1 or pos_manipulator[j][2] == -1:
+                     continue
                 distance = np.sqrt(np.sum(np.square(pos_person[i]-pos_manipulator[j])))
-                if distance < 0.5:
+
+                if distance < 1.0:
                     print("Too close! Distance:", distance)
-                    frame = cv2.putText(frame, "Too close! Distance: %.2f"%(distance), (60, 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                    frame = cv2.putText(frame, "Too close! Distance: %.2f"%(distance), (20, 80+num_distance*40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                 else:
                     print("Distance: ", distance)
-                    frame = cv2.putText(frame, "Distance:  %.2f"%(distance), (60, 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                    frame = cv2.putText(frame, "Distance:  %.2f"%(distance), (20,80+num_distance*40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                num_distance+=1
 
+    fps  = ( fps + (1./(time.time()-t1)) ) / 2
+    print("fps= %.2f"%(fps))
+    frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
     cv2.imshow("video",frame)
-    if True:
-        if save_id>=1000:
-            path = save_path + "%d_color.jpg" % save_id
-        elif save_id>=100:
-            path = save_path + "0%d_color.jpg" % save_id
-        elif save_id>=10:
-            path = save_path + "00%d_color.jpg" % save_id
-        else:
-            path = save_path + "000%d_color.jpg" % save_id
+    if save_result:
+        path = save_path + "%04d_color.jpg" % save_id
         save_id += 1
         if save_id == 1000:
             save_id = 0
