@@ -3,7 +3,8 @@
 # license removed for brevity
 # roslaunch kinect2_bridge kinect2_bridge.launch
 # cd catkin_workspace/
-# source install/setup.bash --extend
+# In this folder:
+# source setup.bash --extend
 # rosrun cv-meter Kinect2_yolo.py
 import rospy
 from std_msgs.msg import String
@@ -42,6 +43,8 @@ def callback(data):
     global bridge
     global fps
     global save_id
+    global frame_count
+    global t0
     frame_count += 1
     t1 = time.time()
     cv_img = bridge.imgmsg_to_cv2(data, "bgr8")
@@ -88,6 +91,9 @@ def callback(data):
 
     #fps  = ( fps + (1./(time.time()-t1)) ) / 2
     fps  = float(frame_count/(time.time()-t0))
+    if frame_count % 200 == 0:   # Refresh every 200 frames 
+        frame_count = 0
+        t0 = time.time()
     print("fps= %.2f"%(fps))
     frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
     cv2.imshow("video",frame)

@@ -1,5 +1,6 @@
 # CV-Meter
 [ROS Project] Distance measurement between human and robot by Kinect V2.
+
 I modified the YOLO v4 code of this repository: https://github.com/bubbliiiing/yolov4-tf2
 
 ## Requirements
@@ -50,7 +51,9 @@ source setup.bash --extend
 
 download my model data file(avaliable later), move the last2.h5 to the path 【.../cv-meter/scripts/logs/】
 
-If your ROS workspace is not 【~/catkin_ws】, change the path from scripts/yolo.py to your path.
+if your ROS workspace is not 【~/catkin_ws】, change the path from scripts/yolo.py to your path.
+
+run the third ROS node:
 ```
 rosrun cv-meter Kinect2_yolo.py
 ```
