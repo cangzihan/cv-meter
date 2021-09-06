@@ -15,10 +15,14 @@ My operating environment: RTX3090, cuda:11.4.1, tensorflow:2.6.0, cudnn:8.2.2.26
 ## Usage
 My YOLO v4 model data file will be avaliable later.
 
+### Install
 Under ～/catkin_ws/src【Your ROS workspace path】：
 ```
 git clone https://github.com/cangzihan/cv-meter.git
-cd ..
+cd cv-meter/scripts
+unzip py3_cvbridge.zip
+chmod a+x _setup_util.py
+cd ../../..
 catkin_make
 ```
 
@@ -34,20 +38,19 @@ roslaunch kinect2_bridge kinect2_bridge.launch
 ```
 
 #### In the third Linux terminal:
-1. Solve the cv_bridge problem in Ros melodic python3 environment. 
+- 1. Solve the cv_bridge problem in Ros melodic python3 environment. 
 
 I refer to this blog：https://blog.csdn.net/weixin_42675603/article/details/107785376
 ```
 cd ~/catkin_ws/src/cv-meter/scripts          # Your ROS workspace
-chmod a+x _setup_util.py
 source setup.bash --extend
 ```
 
-2.run the YOLO v4 node：
+- 2.run the YOLO v4 node：
 
-download the model data file(avaliable later)
+download my model data file(avaliable later)
 
-change the path from scripts/yolo.py to your model data file's path.
+If your ROS workspace is not 【~/catkin_ws】, change the path from scripts/yolo.py to your path.
 ```
 rosrun cv-meter Kinect2_yolo.py
 ```

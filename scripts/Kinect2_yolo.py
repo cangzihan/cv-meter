@@ -34,11 +34,15 @@ save_id = 0
 # Define the image size scaling factor
 scaling_factor = 0.75
 
+t0 = time.time()
+frame_count = 0
+
 def callback(data):
     global cv_depth
     global bridge
     global fps
     global save_id
+    frame_count += 1
     t1 = time.time()
     cv_img = bridge.imgmsg_to_cv2(data, "bgr8")
 
@@ -82,7 +86,8 @@ def callback(data):
                     frame = cv2.putText(frame, "Distance:  %.2f"%(distance), (20,80+num_distance*40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                 num_distance+=1
 
-    fps  = ( fps + (1./(time.time()-t1)) ) / 2
+    #fps  = ( fps + (1./(time.time()-t1)) ) / 2
+    fps  = float(frame_count/(time.time()-t0))
     print("fps= %.2f"%(fps))
     frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
     cv2.imshow("video",frame)

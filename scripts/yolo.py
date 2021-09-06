@@ -15,8 +15,9 @@ from utils.utils import letterbox_image
 
 from sort import SORT
 
+user_name = os.environ['USERNAME']
 # change this path to yours
-current_path = "/home/zihan/catkin_ws/src/cv-meter/scripts"
+current_path = "/home/"+user_name+"/catkin_ws/src/cv-meter/scripts"
 
 image_size = '720p'
 
