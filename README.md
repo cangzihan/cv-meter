@@ -23,6 +23,7 @@ git clone https://github.com/cangzihan/cv-meter.git
 cd cv-meter/scripts
 unzip py3_cvbridge.zip
 chmod a+x _setup_util.py
+chmod a+x Kinect2_yolo.py
 cd ../../..
 catkin_make
 ```
