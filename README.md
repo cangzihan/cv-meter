@@ -46,9 +46,9 @@ cd ~/catkin_ws/src/cv-meter/scripts          # Your ROS workspace
 source setup.bash --extend
 ```
 
-- 2.run the YOLO v4 node：
+- 2. run the YOLO v4 node：
 
-download my model data file(avaliable later)
+download my model data file(avaliable later), move the last2.h5 to the path 【.../cv-meter/scripts/logs/】
 
 If your ROS workspace is not 【~/catkin_ws】, change the path from scripts/yolo.py to your path.
 ```
