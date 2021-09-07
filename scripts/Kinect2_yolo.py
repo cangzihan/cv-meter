@@ -22,13 +22,17 @@ from PIL import Image
 
 from yolo import YOLO
 
+try:
+    home_path = "/home/" + os.environ['USERNAME']
+except:
+    home_path = os.environ['HOME']
 save_result = False
-save_path = "/home/zihan/ros/pics/"
+save_path = home_path + "/pics/"
 
 physical_devices = tf.config.experimental.list_physical_devices('GPU')
 tf.config.experimental.set_memory_growth(physical_devices[0], True)
 
-yolo = YOLO()
+yolo = YOLO(use_sort=True)
 cv_img = 0
 fps = 0.0
 save_id = 0
