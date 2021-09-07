@@ -15,9 +15,13 @@ from utils.utils import letterbox_image
 
 from sort import SORT
 
-user_name = os.environ['USERNAME']
-# change this path to yours
-current_path = "/home/"+user_name+"/catkin_ws/src/cv-meter/scripts"
+# change this path to yours, or you can change the "current_path" directly
+ros_workspace = "/catkin_ws/src/cv-meter/scripts"
+try:
+    user_name = os.environ['USERNAME']
+    current_path = "/home/"+user_name + ros_workspace
+except:
+    current_path = os.environ['HOME'] + ros_workspace
 
 image_size = '720p'
 

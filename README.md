@@ -5,6 +5,7 @@ I modified the YOLO v4 code of this repository: https://github.com/bubbliiiing/y
 
 ## Requirements
 - A GPU with at least 8G of RAM（RTX3060, RTX3090, etc.）
+- Kinect V2
 - Ubuntu 18.04
 - ROS Melodic
 - Install CV Bridge in your ROS workspace: https://github.com/code-iai/iai_kinect2
@@ -18,8 +19,17 @@ My YOLO v4 model data file will be avaliable later.
 
 ### Install
 Under ～/catkin_ws/src【Your ROS workspace path】：
+#### clone my ROS project:
 ```
 git clone https://github.com/cangzihan/cv-meter.git
+```
+or you can clone by:
+```
+git clone git://github.com/cangzihan/cv-meter.git
+```
+
+#### unzip crucial files and compile your ROS workspace:
+```
 cd cv-meter/scripts
 unzip py3_cvbridge.zip
 chmod a+x _setup_util.py
