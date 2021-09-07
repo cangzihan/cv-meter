@@ -12,10 +12,11 @@ I modified the YOLO v4 code of this repository: https://github.com/bubbliiiing/y
 - Python3
 - Python Lib: opencv, numpy, tensorflow-gpu>2.2.0
 
-#### My operating environment: 
+#### Some feasible environments I tested:
 | GPU | cuda | cudnn | tensorflow-gpu | GPU driver version |
 | :-----: | :-----: | :------: | :------: | :------: |
 | RTX3090 | 11.4.1 | 8.2.2.26 | 2.6.0 | 470.63.01 |
+| RTX3060 | 11.1 | 8.0.4.30 | 2.4.0 | 460.67 |
 
 ## Usage
 My YOLO v4 model data file will be avaliable later.
@@ -43,6 +44,7 @@ catkin_make
 
 ### Open 3 linux terminals:
 Before starting, please make sure cv_bridge is ready.
+
 as your ROS workspace(like ~/catkin_ws/src) must include the following folders:
 - cv-meter
 - [iai_kinect2-master](https://github.com/code-iai/iai_kinect2)
