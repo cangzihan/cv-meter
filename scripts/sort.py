@@ -10,9 +10,9 @@ class KalmanTracker(KalmanFilter):
         self.disappear = 0
 
         self.P = np.identity(7) * 10
-        self.P[4, 4] = 10000
-        self.P[5, 5] = 10000
-        self.P[6, 6] = 10000
+        self.P[4, 4] = 1000
+        self.P[5, 5] = 1000
+        self.P[6, 6] = 1000
         self.Q = np.identity(7)
         self.Q[4, 4] = 0.025
         self.Q[5, 5] = 0.025
