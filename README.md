@@ -19,7 +19,8 @@ I modified the YOLO v4 code of this repository: https://github.com/bubbliiiing/y
 | RTX3060 | 11.1 | 8.0.4.30 | 2.4.0 | 460.67 |
 
 ## Usage
-My YOLO v4 model data file will be avaliable later.
+### Training YOLO v4
+My YOLO v4 model data file is available now, you can also train a new YOLO v4 network by custom dataset, see https://github.com/bubbliiiing/yolov4-tf2.
 
 ### Install
 Under ~/catkin_ws/src【Your ROS workspace path】：
@@ -70,9 +71,9 @@ source setup.bash --extend
 
 - 2. run the YOLO v4 node：
 
-download my model data file(avaliable later), move the last2.h5 to the path 【.../cv-meter/scripts/logs/】
+Before running the YOLO v4 node, you should train a new YOLO v4 network and generate a .h5 file, or download my model data file(avaliable at [Google Drive](https://drive.google.com/file/d/1vtjM6UKwlBbt2O_WNgb5Efv2y8T8-p09/view?usp=sharing)), move the last2.h5 to the path 【.../cv-meter/scripts/logs/】
 
-if your ROS workspace is not 【~/catkin_ws】, change the path from scripts/yolo.py to your path.
+if your ROS workspace is not 【~/catkin_ws】, change the path code at line 103 of scripts/yolo.py to your path.
 
 run the third ROS node:
 ```
