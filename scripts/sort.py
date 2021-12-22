@@ -241,7 +241,7 @@ class SORT(object):
                 self.track_list.pop(i)
                 self.score_list.pop(i)
                 continue
-            if self.track_list[i].age > 3:
+            if self.track_list[i].age > 3 and self.track_list[i].disappear < 15: # about 0.5s
                 self.track_list[i].predict(mode=0, replace=True)
                 if self.track_list[i].pre_current[2] < 0:  # predict area < 0
                     self.track_list.pop(i)
