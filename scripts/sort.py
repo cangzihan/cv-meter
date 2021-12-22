@@ -28,11 +28,11 @@ class KalmanTracker(KalmanFilter):
         self.A = np.identity(7)
         self.A[0, 4] = self.delta_t
         self.A[1, 5] = self.delta_t
-        self.A[2, 6] = self.delta_t * 0.0001
+        self.A[2, 6] = self.delta_t
+        # Predict parameter for unmached tracks
         self.A_predict = np.identity(7)
-        self.A_predict[0, 4] = self.delta_t / 2
-        self.A_predict[1, 5] = self.delta_t / 2
-        self.A_predict[2, 6] = self.delta_t / 2 * 0.0001
+        self.A_predict[0, 4] = self.delta_t
+        self.A_predict[1, 5] = self.delta_t
 
         self.x_before = np.array([[initial_position[0], initial_position[1], initial_position[2], initial_position[3],
                                    0, 0, 0]])
@@ -242,7 +242,7 @@ class SORT(object):
                 self.score_list.pop(i)
                 continue
             if self.track_list[i].age > 3:
-                self.track_list[i].predict(mode=1, replace=True)
+                self.track_list[i].predict(mode=0, replace=True)
                 if self.track_list[i].pre_current[2] < 0:  # predict area < 0
                     self.track_list.pop(i)
                     self.score_list.pop(i)
